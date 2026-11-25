@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support Center</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; padding: 28px 16px;
+      display: grid; place-items: center;
+      font-family: Arial, sans-serif; color: #eef5ff;
+      background: radial-gradient(circle at top, #203d68 0, #101c32 42%, #080d19 100%);
+    }
+    .card {
+      width: min(100%, 560px); padding: 34px;
+      background: rgba(15, 28, 48, .96);
+      border: 1px solid #345276; border-radius: 20px;
+      box-shadow: 0 18px 55px #0008;
+    }
+    .icon {
+      width: 58px; height: 58px; display: grid; place-items: center;
+      border-radius: 16px; background: #1d3e68; color: #79b8ff;
+      font-size: 28px; margin-bottom: 20px;
+    }
+    h1 { margin: 0 0 10px; font-size: 30px; color: #79b8ff; }
+    .intro { color: #b7c7dc; line-height: 1.55; margin: 0 0 26px; }
+    label { display: block; margin: 16px 0 8px; font-size: 14px; color: #dce9f8; }
+    input, textarea {
+      width: 100%; padding: 13px 14px; border-radius: 10px;
+      border: 1px solid #385372; background: #0b1729; color: #fff;
+      font: inherit; outline: none;
+    }
+    input:focus, textarea:focus { border-color: #60a5fa; box-shadow: 0 0 0 3px #60a5fa22; }
+    textarea { min-height: 135px; resize: vertical; }
+    button, .mail-link {
+      display: block; width: 100%; margin-top: 22px; padding: 14px 18px;
+      border: 0; border-radius: 11px; background: #3b82f6; color: white;
+      font-size: 16px; font-weight: 700; text-align: center; text-decoration: none;
+      cursor: pointer; transition: background .2s, transform .2s;
+    }
+    button:hover, .mail-link:hover { background: #2563eb; transform: translateY(-1px); }
+    .direct { margin-top: 20px; padding: 16px; border-radius: 12px; background: #0b1729; border: 1px solid #263f5d; }
+    .direct small { display: block; color: #9fb3cc; margin-bottom: 7px; }
+    .direct a { color: #83bdff; overflow-wrap: anywhere; text-decoration: none; }
+    .note { color: #91a6c0; font-size: 12px; line-height: 1.5; margin: 18px 0 0; }
+    @media (max-width: 480px) { .card { padding: 24px 19px; } h1 { font-size: 26px; } }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="icon" aria-hidden="true">🎧</div>
+    <h1>Центр поддержки</h1>
+    <p class="intro">Возникла проблема или есть вопрос? Заполни форму — мы подготовим обращение для отправки в службу поддержки.</p>
+
+    <form id="supportForm">
+      <label for="name">Твоё имя</label>
+      <input id="name" name="name" type="text" placeholder="Как к тебе обращаться?" required>
+
+      <label for="email">Твоя электронная почта</label>
+      <input id="email" name="email" type="email" placeholder="name@example.com" required>
+
+      <label for="subject">Тема обращения</label>
+      <input id="subject" name="subject" type="text" placeholder="Например: Не могу войти" required>
+
+      <label for="message">Опиши проблему</label>
+      <textarea id="message" name="message" placeholder="Подробно опиши, что произошло..." required></textarea>
+
+      <button type="submit">Отправить обращение</button>
+    </form>
+
+    <div class="direct">
+      <small>Также можно написать напрямую:</small>
+      <a href="mailto:nwtfhnjwwyudjnpyh@gmail.com">nwtfhnjwwyudjnpyh@gmail.com</a>
+    </div>
+    <p class="note">При отправке формы откроется почтовое приложение с подготовленным письмом. Для автоматической отправки без открытия почты понадобится подключить почтовый сервис или сервер.</p>
+  </main>
+
+  <script>
+    document.getElementById('supportForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const sender = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      const body = [
+        'Имя: ' + name,
+        'Почта для ответа: ' + sender,
+        '',
+        'Описание проблемы:',
+        message
+      ].join('\\n');
+
+      const mailto = 'mailto:nwtfhnjwwyudjnpyh@gmail.com'
+        + '?subject=' + encodeURIComponent('[Support] ' + subject)
+        + '&body=' + encodeURIComponent(body);
+
+      window.location.href = mailto;
+    });
+  </script>
+</body>
+</html>
